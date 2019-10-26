@@ -66,6 +66,21 @@ class Adtraction
         return $this->_request($uri)[0];
     }
 
+    public function getAds($market, $channelId, $programId)
+    {
+        if (strlen($market) != 2) {
+            throw new \Exception('Has to be DK, SE or simular');
+        }
+
+        if (!preg_match("/^\d+$/", $channelId)) {
+            throw new \Exception('ChannelId has to be numeric');
+        }
+
+        $uri = 'ads/'.$programId.'/'.$channelId.'/?token='.$this->token;
+
+        return $this->_request($uri)[0];
+    }
+
     public function getNewPartners($marketId)
     {
         if (!preg_match("/^\d+$/", $marketId)) {
